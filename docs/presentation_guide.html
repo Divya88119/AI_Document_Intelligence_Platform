@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AI Document Intelligence & Data Analytics Platform — Architectural & Interview Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap');
+
+  @page {
+    size: A4;
+    margin: 16mm 14mm 16mm 14mm;
+    @bottom-right {
+      content: "Page " counter(page);
+      font-size: 8pt;
+      color: #94a3b8;
+      font-family: 'Inter', sans-serif;
+    }
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: #1e293b;
+    background-color: #ffffff;
+    line-height: 1.55;
+    font-size: 9.5pt;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .header-cover {
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #31104b 100%);
+    color: #ffffff;
+    padding: 28px 24px;
+    border-radius: 12px;
+    margin-bottom: 22px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+  }
+
+  .header-cover .badge {
+    display: inline-block;
+    background: rgba(99, 102, 241, 0.3);
+    border: 1px solid rgba(165, 180, 252, 0.4);
+    color: #c7d2fe;
+    font-size: 7.5pt;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+  }
+
+  .header-cover h1 {
+    font-size: 19pt;
+    font-weight: 800;
+    line-height: 1.25;
+    color: #ffffff;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+
+  .header-cover p {
+    font-size: 9.5pt;
+    color: #cbd5e1;
+    max-width: 90%;
+    line-height: 1.45;
+  }
+
+  .meta-bar {
+    display: flex;
+    gap: 18px;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    font-size: 8pt;
+    color: #94a3b8;
+  }
+  .meta-bar strong {
+    color: #e2e8f0;
+  }
+
+  h2 {
+    font-size: 13pt;
+    font-weight: 800;
+    color: #0f172a;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 5px;
+    margin-top: 22px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: -0.01em;
+    page-break-after: avoid;
+  }
+
+  h3 {
+    font-size: 10.5pt;
+    font-weight: 700;
+    color: #334155;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    page-break-after: avoid;
+  }
+
+  p {
+    margin-bottom: 8px;
+    color: #334155;
+  }
+
+  .elevator-pitch {
+    background: #f8fafc;
+    border-left: 4px solid #6366f1;
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    font-size: 9pt;
+    color: #1e293b;
+    margin-bottom: 16px;
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  .module-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 12px;
+    page-break-inside: avoid;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+  }
+
+  .module-card .module-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 4px;
+  }
+
+  .module-card .module-title {
+    font-size: 10.5pt;
+    font-weight: 700;
+    color: #1e1b4b;
+  }
+
+  .module-card .module-tag {
+    font-size: 7pt;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 4px;
+    background: #e0e7ff;
+    color: #3730a3;
+    text-transform: uppercase;
+  }
+
+  .tech-stack-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+  }
+
+  .tech-pill {
+    background: #f1f5f9;
+    color: #475569;
+    font-size: 7pt;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  ul {
+    margin-left: 18px;
+    margin-bottom: 8px;
+  }
+
+  li {
+    margin-bottom: 4px;
+    color: #334155;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0 14px 0;
+    font-size: 8pt;
+    page-break-inside: avoid;
+  }
+
+  th, td {
+    border: 1px solid #cbd5e1;
+    padding: 6px 8px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #f1f5f9;
+    font-weight: 700;
+    color: #0f172a;
+    text-transform: uppercase;
+    font-size: 7pt;
+    letter-spacing: 0.05em;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f8fafc;
+  }
+
+  .qa-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 11px 13px;
+    margin-bottom: 11px;
+    page-break-inside: avoid;
+  }
+
+  .qa-question {
+    font-size: 9.5pt;
+    font-weight: 700;
+    color: #1e1b4b;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .qa-question .q-badge {
+    background: #6366f1;
+    color: #ffffff;
+    font-size: 7.5pt;
+    font-weight: 800;
+    padding: 1px 6px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  .qa-answer {
+    font-size: 8.5pt;
+    color: #334155;
+    line-height: 1.45;
+    border-left: 2px solid #cbd5e1;
+    padding-left: 10px;
+    margin-top: 4px;
+  }
+
+  .qa-answer strong {
+    color: #0f172a;
+  }
+
+  .checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 8.5pt;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    padding: 8px 10px;
+    border-radius: 6px;
+  }
+
+  .check-icon {
+    color: #10b981;
+    font-weight: bold;
+    font-size: 10pt;
+  }
+
+  .code-snippet {
+    font-family: 'JetBrains Mono', monospace;
+    background: #0f172a;
+    color: #38bdf8;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-size: 7.5pt;
+  }
+
+  .page-break {
+    page-break-before: always;
+  }
+</style>
+</head>
+<body>
+
+<!-- Cover & Header -->
+<div class="header-cover">
+  <div class="badge">Enterprise Engineering & Data Science Playbook</div>
+  <h1>AI Document Intelligence &<br>Automated Data Analytics Platform</h1>
+  <p>Comprehensive Architectural Deep Dive, Module Specifications, and Interview Defense Guide.</p>
+  <div class="meta-bar">
+    <div><strong>Architecture:</strong> .NET 8 Web API + React 18 SPA</div>
+    <div><strong>Database:</strong> SQL Server + EF Core</div>
+    <div><strong>AI Core:</strong> Gemini / OpenAI / Rule-Based NLP</div>
+    <div><strong>Author:</strong> Full Stack & Data Science Portfolio</div>
+  </div>
+</div>
+
+<!-- Section 1: Pitch -->
+<h2>🎯 1. The 30-Second Elevator Pitch</h2>
+<div class="elevator-pitch">
+  "I designed and developed an enterprise-grade <strong>AI Document Intelligence and Automated Data Analytics Platform</strong> using .NET 8, EF Core, SQL Server, and React 18 with TypeScript.<br><br>
+  The system automates two critical business pipelines:<br>
+  1. <strong>Unstructured Document Intelligence:</strong> Ingests multi-format documents (PDF, Word, Excel), performs text/table extraction, AI document classification, entity/key-value extraction, and grounded semantic Q&A.<br>
+  2. <strong>Automated Data Analytics Engine:</strong> Ingests raw tabular datasets (CSV/Excel), conducts automated data quality audits, imputes missing values, computes descriptive statistics & Pearson correlation matrices, generates visual trend reports, and forecasts future performance using time-series regression with 95% confidence intervals.<br><br>
+  Engineered with non-blocking background worker queues (<code>System.Threading.Channels</code>), JWT authentication, and role-based access control."
+</div>
+
+<!-- Section 2: Architecture Diagram -->
+<h2>🏗️ 2. High-Level Architecture Overview</h2>
+<p>The system is built on a clean 3-tier architecture with decoupled asynchronous ingestion:</p>
+<table style="margin-bottom: 16px;">
+  <thead>
+    <tr>
+      <th>Layer</th>
+      <th>Technologies</th>
+      <th>Responsibilities</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Frontend Layer</strong></td>
+      <td>React 18, Vite, TypeScript, Tailwind CSS, Lucide Icons, Axios</td>
+      <td>Responsive UI, Document Studio, Chat Q&A, Data Analytics Studio (6 interactive tabs), Protected Routes, JWT session storage.</td>
+    </tr>
+    <tr>
+      <td><strong>API Gateway Layer</strong></td>
+      <td>ASP.NET Core 8 Web API, JWT Bearer, CORS, RFC 7807 Middleware</td>
+      <td>Authentication, Role-Based Access Control (Admin/User), Multipart streaming uploads, REST routing, request validation.</td>
+    </tr>
+    <tr>
+      <td><strong>Background & Core Engine</strong></td>
+      <td><code>System.Threading.Channels</code>, .NET <code>BackgroundService</code>, <code>PdfPig</code>, <code>OpenXML</code></td>
+      <td>Non-blocking worker queue, asynchronous document processing, text & table parsing, error isolation, self-healing job recovery.</td>
+    </tr>
+    <tr>
+      <td><strong>AI & Analytics Engine</strong></td>
+      <td>Google Gemini API, OpenAI API, Heuristic NLP, Least-Squares Regression</td>
+      <td>Document classification, Named Entity Recognition (NER), grounded conversational Q&A, Data Health scoring, outlier detection, predictive forecasting.</td>
+    </tr>
+    <tr>
+      <td><strong>Persistence Layer</strong></td>
+      <td>SQL Server 2022, Entity Framework Core 8, Local Disk Storage</td>
+      <td>Relational 3NF tables, indexed foreign keys, migration history, secure local document binary storage.</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Section 3: Module Deep Dive -->
+<h2>📦 3. Module-by-Module Technical Deep Dive</h2>
+
+<div class="module-card">
+  <div class="module-header">
+    <div class="module-title">Module 1: Authentication, RBAC & Security</div>
+    <div class="module-tag">Core Security</div>
+  </div>
+  <div class="tech-stack-list">
+    <span class="tech-pill">JWT Bearer</span>
+    <span class="tech-pill">BCrypt.Net</span>
+    <span class="tech-pill">Claims-Based RBAC</span>
+    <span class="tech-pill">EF Core Seeder</span>
+  </div>
+  <ul>
+    <li><strong>Token Security:</strong> Generates HMAC-SHA256 signed JWT tokens encapsulating User ID, Email, and Role (<code>Admin</code>, <code>User</code>).</li>
+    <li><strong>Password Security:</strong> One-way password hashing using <code>BCrypt.Net</code> (salt work factor = 11).</li>
+    <li><strong>Auto-Seeding & Migration:</strong> <code>InitialAdminSeeder</code> applies pending EF Core migrations on application startup and seeds default admin credentials without manual database intervention.</li>
+  </ul>
+</div>
+
+<div class="module-card">
+  <div class="module-header">
+    <div class="module-title">Module 2: Multi-Format Extraction Engine</div>
+    <div class="module-tag">Document Parsing</div>
+  </div>
+  <div class="tech-stack-list">
+    <span class="tech-pill">PdfPig (PDF)</span>
+    <span class="tech-pill">DocumentFormat.OpenXml (.docx/.xlsx)</span>
+    <span class="tech-pill">UTF-8 Decoders</span>
+  </div>
+  <ul>
+    <li><strong>PDF Extraction:</strong> Uses <code>PdfPig</code> to iterate page-by-page, extracting textual flow, headers, and paragraph blocks.</li>
+    <li><strong>Word & Excel Processing:</strong> Uses <code>OpenXML</code> to traverse body elements and shared string tables, transforming spreadsheets into structured CSV rows.</li>
+    <li><strong>Extracted Content Record:</strong> Stores raw text, total word count, total page count, and timestamp in <code>DocumentExtractedContent</code>.</li>
+  </ul>
+</div>
+
+<div class="module-card">
+  <div class="module-header">
+    <div class="module-title">Module 3: Asynchronous Background Processing Pipeline</div>
+    <div class="module-tag">High Concurrency</div>
+  </div>
+  <div class="tech-stack-list">
+    <span class="tech-pill">System.Threading.Channels</span>
+    <span class="tech-pill">BackgroundService</span>
+    <span class="tech-pill">State Machine</span>
+  </div>
+  <ul>
+    <li><strong>Non-Blocking Ingestion:</strong> The upload endpoint writes the file, enqueues the document ID to a bounded channel, and returns HTTP 201 in under <strong>50ms</strong>.</li>
+    <li><strong>Background Worker:</strong> <code>DocumentProcessingWorker</code> continuously consumes the queue, executing extraction and AI intelligence asynchronously.</li>
+    <li><strong>Crash Resilience:</strong> On server restart, the worker automatically scans SQL Server for pending/unprocessed documents and re-queues them.</li>
+  </ul>
+</div>
+
+<div class="page-break"></div>
+
+<div class="module-card">
+  <div class="module-header">
+    <div class="module-title">Module 4: AI Document Intelligence & Structuring</div>
+    <div class="module-tag">AI / NLP Core</div>
+  </div>
+  <div class="tech-stack-list">
+    <span class="tech-pill">Google Gemini</span>
+    <span class="tech-pill">OpenAI</span>
+    <span class="tech-pill">Offline Heuristic Engine</span>
+    <span class="tech-pill">JSON Schema</span>
+  </div>
+  <ul>
+    <li><strong>Multi-Engine Fallback:</strong> Calls primary cloud LLM APIs, but seamlessly falls back to a built-in offline NLP engine if keys are missing or offline.</li>
+    <li><strong>Structured Extraction:</strong> Outputs category classification, confidence score, executive summary, key highlights, monetary totals, dates, and action items.</li>
+  </ul>
+</div>
+
+<div class="module-card">
+  <div class="module-header">
+    <div class="module-title">Module 5: Semantic Q&A & Document Chat Studio</div>
+    <div class="module-tag">Conversational AI</div>
+  </div>
+  <div class="tech-stack-list">
+    <span class="tech-pill">Prompt Grounding</span>
+    <span class="tech-pill">Zero Hallucination Constraints</span>
+    <span class="tech-pill">Chat History Persistence</span>
+  </div>
+  <ul>
+    <li><strong>Grounded Context:</strong> Injects the verified extracted text directly into the LLM system prompt as the sole source of truth.</li>
+    <li><strong>Hallucination Defense:</strong> Enforces strict system prompt instructions: <em>"Answer strictly using the document context. If the document does not contain the answer, explicitly state that it is not present."</em></li>
+  </ul>
+</div>
+
+<div class="module-card">
+  <div class="module-header">
+    <div class="module-title">Module 6: Automated Data Analytics & Predictive Engine</div>
+    <div class="module-tag">Data Science & ML</div>
+  </div>
+  <div class="tech-stack-list">
+    <span class="tech-pill">Data Profiler</span>
+    <span class="tech-pill">IQR Outlier Detection</span>
+    <span class="tech-pill">Pearson Correlation</span>
+    <span class="tech-pill">Time-Series Regression</span>
+  </div>
+  <ul>
+    <li><strong>1. Data Profiling & Health Audit:</strong> Inferred data types (<code>Numeric</code>, <code>DateTime</code>, <code>Categorical</code>), cardinality, null count, duplicates, and Data Health Score (0–100%).</li>
+    <li><strong>2. Automated Cleaning:</strong> Median/mean imputation for numeric nulls, categorical standardization, duplicate removal, and one-click <strong>Download Cleaned CSV</strong>.</li>
+    <li><strong>3. Descriptive Statistics & EDA:</strong> Computes Count, Mean ($\mu$), Median, StdDev ($\sigma$), Min, Max, $Q25$, $Q75$, and Skewness.</li>
+    <li><strong>4. Pearson Correlation Matrix:</strong> Pairwise correlation ($r \in [-1.0, +1.0]$) heatmap identifying feature drivers.</li>
+    <li><strong>5. Predictive Forecasting:</strong> Linear/exponential trend projection across future periods ($t+1, t+2, \dots$) with <strong>95% Confidence Intervals</strong> and <strong>Projected Growth Rate ($\Delta\%$)</strong>.</li>
+  </ul>
+</div>
+
+<div class="module-card">
+  <div class="module-header">
+    <div class="module-title">Module 7 & 8: Dashboard, Aggregations & React 18 SPA</div>
+    <div class="module-tag">Frontend & Metrics</div>
+  </div>
+  <div class="tech-stack-list">
+    <span class="tech-pill">React 18</span>
+    <span class="tech-pill">TypeScript</span>
+    <span class="tech-pill">Tailwind CSS</span>
+    <span class="tech-pill">EF Core AsNoTracking</span>
+  </div>
+  <ul>
+    <li><strong>Executive Dashboard:</strong> Real-time storage consumption, success/failure rates, document category distribution, and recent processing feed.</li>
+    <li><strong>Modern UX:</strong> Dark-themed studio, side-by-side text & insight panels, 1-click sample dataset generators, and responsive SVG charts.</li>
+  </ul>
+</div>
+
+<!-- Section 4: Interview Questions -->
+<h2>🎤 4. Top Interview Questions & Model Answers</h2>
+
+<div class="qa-card">
+  <div class="qa-question">
+    <span class="q-badge">Q1</span>
+    <span>Why did you use <code>System.Threading.Channels</code> instead of processing files synchronously inside the controller?</span>
+  </div>
+  <div class="qa-answer">
+    "Document parsing, OCR, and AI analysis take several seconds per file. If executed synchronously, the web server's thread pool would become exhausted under high traffic, leading to thread starvation and HTTP 504 gateway timeouts. By using <code>System.Threading.Channels.Channel&lt;int&gt;</code>, the upload API immediately saves the binary, marks the record as <code>Queued</code>, and responds in under <strong>50ms</strong>. The background worker consumes jobs asynchronously with thread safety and backpressure."
+  </div>
+</div>
+
+<div class="qa-card">
+  <div class="qa-question">
+    <span class="q-badge">Q2</span>
+    <span>How does your automated data cleaning and imputation pipeline work?</span>
+  </div>
+  <div class="qa-answer">
+    "When a raw CSV or Excel dataset is ingested:<br>
+    1. <strong>Deduplication:</strong> Generates row hash signatures and removes exact duplicate records.<br>
+    2. <strong>Type Inference:</strong> Profiles each feature as Numeric, DateTime, Categorical, or Free Text.<br>
+    3. <strong>Missing Value Imputation:</strong> Numeric features are imputed with the column median (which is robust against extreme outliers), and categorical missing cells are standardized to 'Unknown'.<br>
+    4. <strong>Outlier Detection:</strong> Computes the Interquartile Range ($IQR = Q3 - Q1$) and flags anomalies outside $[Q1 - 1.5 \times IQR, Q3 + 1.5 \times IQR]$."
+  </div>
+</div>
+
+<div class="qa-card">
+  <div class="qa-question">
+    <span class="q-badge">Q3</span>
+    <span>How does your predictive forecasting algorithm work?</span>
+  </div>
+  <div class="qa-answer">
+    "We use time-series regression extrapolation. We compute the linear slope ($m$) and intercept ($c$) from historical points using least-squares regression ($y = mx + c$) and project values across future horizons ($t+1, t+2, \dots, t+n$). To communicate uncertainty, we calculate the standard error of regression and construct <strong>95% confidence intervals</strong> ($1.96 \times \text{Standard Error}$), providing upper and lower bounds alongside the projected growth rate ($\Delta\%$)."
+  </div>
+</div>
+
+<div class="qa-card">
+  <div class="qa-question">
+    <span class="q-badge">Q4</span>
+    <span>How do you prevent hallucinations in the Document Chat Studio?</span>
+  </div>
+  <div class="qa-answer">
+    "We use <strong>grounded prompt engineering</strong>. The document's verified extracted text is injected directly into the system prompt as reference ground truth. We enforce strict negative constraints: <em>'Answer the question strictly using only the provided document text. If the answer is not mentioned, explicitly state that it is not present.'</em> We also set temperature low (0.1–0.2) to prioritize factual precision."
+  </div>
+</div>
+
+<div class="qa-card">
+  <div class="qa-question">
+    <span class="q-badge">Q5</span>
+    <span>Why did you use <code>AsNoTracking()</code> in Entity Framework Core queries?</span>
+  </div>
+  <div class="qa-answer">
+    "In read-only endpoints (such as fetching reports, listing documents, or calculating dashboard statistics), EF Core's change tracker is unnecessary. <code>.AsNoTracking()</code> bypasses identity resolution and snapshot tracking, significantly reducing memory allocations and improving query execution speed."
+  </div>
+</div>
+
+<!-- Section 5: Live Demo Checklist -->
+<h2>📋 5. Live Interview Demonstration Checklist</h2>
+<div class="checklist-item">
+  <span class="check-icon">✓</span>
+  <div><strong>1. Open Platform:</strong> Navigate to <code>http://localhost:5173</code> and log in with <code>admin@docintel.io</code> / <code>AdminPassword123!</code>.</div>
+</div>
+<div class="checklist-item">
+  <span class="check-icon">✓</span>
+  <div><strong>2. Demonstrate Data Analytics Studio:</strong> Click "1-Click Demo Sales Dataset", show Data Health (100%), Column Profiles, Cleaning Log, Statistics, Pearson Heatmap, and the +3.3% Predictive Forecast with 95% Confidence Bounds.</div>
+</div>
+<div class="checklist-item">
+  <span class="check-icon">✓</span>
+  <div><strong>3. Demonstrate Document Studio & Q&A:</strong> Open an Invoice/Contract, review extracted key-values (Total, Due Date), and ask a natural language question in the Chat Studio.</div>
+</div>
+<div class="checklist-item">
+  <span class="check-icon">✓</span>
+  <div><strong>4. Show Swagger Docs:</strong> Open <code>http://localhost:5000/swagger</code> to highlight the clean RESTful API design.</div>
+</div>
+
+</body>
+</html>
+

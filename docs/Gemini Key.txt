@@ -1,0 +1,13 @@
+API Key
+AQ.Ab8RN6Jz_6A5XlhB8lvYN-5186vY2e7WHiMKOcvdBMdoI5x2Fw
+Name
+AIDocumentAnalysisKey
+Project name
+projects/59074044192
+Project number
+59074044192
+----
+
+OpenAi
+
+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

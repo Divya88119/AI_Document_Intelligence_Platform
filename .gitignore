@@ -1,0 +1,11 @@
+# Build & Binary directories
+**/bin/
+**/obj/
+
+# Node dependencies & build output
+**/node_modules/
+**/dist/
+
+# IDE / VS Code settings
+.vscode/
+*.user
